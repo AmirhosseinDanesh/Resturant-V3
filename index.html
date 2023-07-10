@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modiran Resturant | رستوران مدیران</title>
+  <meta name="theme-color" content="#27272a">
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icons//apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons//favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons//favicon-16x16.png">
+</head>
+
+<body class="font-Dana bg-gray-100 dark:bg-zinc-800">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+
+
+
+  </script>
+</body>
+
+</html>

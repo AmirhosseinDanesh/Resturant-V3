@@ -8,7 +8,7 @@ export default function PanelNav() {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center justify-start gap-x-4">
                         <h1 className="flex">
-                            <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">گلدن کافی</span>
+                            <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">رستوران مدیران</span>
                         </h1>
                     </div>
                     <div className="flex items-center">

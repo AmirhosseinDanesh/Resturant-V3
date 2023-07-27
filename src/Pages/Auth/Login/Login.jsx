@@ -77,7 +77,7 @@ export default function Login() {
                                             auth.login({}, data.accessToken)
                                             toast.success("با موفقیت وارد شدید.")
                                             setTimeout(() => {
-                                                navigate("/");
+                                                navigate("/p-admin/dashboard");
                                                 setSubmitting(false)
                                             }, 1500);
 

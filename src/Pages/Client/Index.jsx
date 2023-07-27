@@ -1,47 +1,37 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-import { NavLink } from 'react-router-dom'
 import { DataUrlV1 } from '../../Data/Data';
-import ArticleCart from '../../Components/ArticleCart/ArticleCart'
+import { SwiperSlide } from 'swiper/react'
 
 import Header from '../../Components/Header/Header'
 import Slider from '../../Components/Slider/Slider'
 import ProductCart from "../../Components/ProductCart/ProductCart"
 import ReactLoading from 'react-loading';
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode, Pagination, Autoplay, Navigation } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/free-mode';
-
 export default function Index() {
   const [allProducts, setAllProducts] = useState([])
-  const [articles, setArticles] = useState([])
-
+  const [allCategory, setAllCategory] = useState([])
+  const [filterProducts, setFilterProducts] = useState(allProducts);
   const ref = useRef(null);
-  const slideRef = useRef();
-  const [slideBegOrNot, setSlideByState] = useState({
-    isFirst: true,
-    isLast: false,
-  })
 
-  const onSlideChange = swiper => {
-    setSlideByState({
-      isFirst: swiper.isBeginning,
-      isLast: swiper.isEnd,
-    })
+  const filterCategory = (id) => {
+    let filteringCategory = allProducts.filter(pr => pr.categoryID._id === id);
+    setFilterProducts(filteringCategory);
+    console.log(filteringCategory);
   }
 
-  const { isFirst, isLast } = slideBegOrNot;
 
   useEffect(() => {
     fetch(`${DataUrlV1}/courses`)
       .then(res => res.json())
-      .then(data => setAllProducts(data))
-    fetch(`${DataUrlV1}/articles`)
+      .then(data => {
+        setAllProducts(data)
+        setFilterProducts(data)
+      })
+  
+    fetch(`${DataUrlV1}/category`)
       .then(res => res.json())
-      .then(data => setArticles(data))
+      .then(data => setAllCategory(data))
   }, [])
 
   return (
@@ -83,25 +73,37 @@ export default function Index() {
       <section ref={ref} className='products-section pt-8 md:pt-20 lg:pt-48 my-8'>
         <div className='container'>
           {/* section Head */}
-          <div className='flex justify-between items-center mb-5 md:mb-12'>
+          <div className='flex justify-center items-center mb-5 md:mb-12'>
             <div className='text-zinc-700 dark:text-white'>
-              <h3 className='text-2xl md:text-5xl font-MorabbaMedium '>جدیدترین محصولات</h3>
-              <h6 className='text-lg md:text-3xl font-MorabbaLight md:mt-1.5 mt-0.5'>فرآوری شده از دانه قهوه</h6>
+              <h3 className='text-2xl md:text-5xl font-MorabbaMedium '>دسته بندی محصولات</h3>
             </div>
-            <NavLink className="flex items-center md:gap-x-1 text-base md:text-xl tracking-tightest text-orange-300 hover:bg-orange-300/20 pr-3 pl-1 h-10 rounded-lg transition-colors" to="/shop">
-              <span className='hidden md:inline-block'>مشاهده همه محصولات</span>
-              <span className='inline-block md:hidden'>مشاهده همه</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
-              </svg>
-            </NavLink>
           </div>
 
+          <div className='my-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  place-items-center'>
+            <button className='w-28 sm:w-32 md:w-36 lg:w-40 text-gray-800 bg-gradient-to-r from-orange-300 to-orange-400 hover:bg-gradient-to-l font-MorabbaBold rounded-2xl text-sm text-center py-3 px-2 my-2'
+              onClick={()=>{
+                setFilterProducts(allProducts)
+              }}
+            >
+              همه
+            </button>
+            {
+              allCategory.map((cat) => (
+                <button className='w-28 sm:w-32 md:w-36 lg:w-40 text-gray-800 bg-gradient-to-r from-orange-300 to-orange-400 hover:bg-gradient-to-l font-MorabbaBold rounded-2xl text-sm text-center py-3 px-2 my-2'
+                  onClick={() => {
+                    filterCategory(cat._id)
+                  }}
+                >
+                  {cat.title}
+                </button>
+              ))
+            }
+          </div>
           {/* section body */}
           <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-5'>
             {
               allProducts.length ? (
-                allProducts.slice(0, 8).map((pro) => (
+                filterProducts.map((pro) => (
                   <ProductCart key={pro._id} {...pro} />
                 ))
               ) : (
@@ -113,7 +115,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
     </>
   )
 }

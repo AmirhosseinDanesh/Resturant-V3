@@ -11,6 +11,7 @@ const fa = {
     comments: "کامنت ها",
     contact: "پیام ها",
     offs: "کد تخفیف",
+    campaign: "کمپین",
     
     allSell : "کل فروش",
     profit : "سود فروش",

@@ -165,7 +165,7 @@ export default function Articles() {
                 </ErrorMessage>
               </div>
               <div>
-                <label className="input-label">عکس مقاله</label>
+                <label className="input-label">عکس مقاله 280*160</label>
                 <Field type="file" name="cover" className="input"></Field>
                 <ErrorMessage name="cover">
                   {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
@@ -216,7 +216,7 @@ export default function Articles() {
               childrenTH={
                 <tr>
                   <th scope="col" className="px-3 py-3">
-                    عکس مقاله
+                    عکس مقاله 
                   </th>
                   <th scope="col" className="px-3 py-3">
                     موضوع مقاله
@@ -236,7 +236,7 @@ export default function Articles() {
                 currentItems.map((art) => (
                   <tr key={art._id} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <td className="px-2 py-2">
-                      <img src={`${DataUrl}/courses/covers/${art.cover}`} alt="" className='w-[100px]' />
+                      <img loading='lazy' src={`${DataUrl}/courses/covers/${art.cover}`} alt="" className='w-[100px]' />
                     </td>
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {art.title}

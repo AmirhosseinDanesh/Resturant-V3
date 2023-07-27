@@ -74,7 +74,7 @@ export default function Products() {
       {/* New Product Field */}
       <Formik
         validate={productValidate}
-        initialValues={{ name: "", shortName: "", description: "", price: "", status: "start", categoryID: "", cover: "" }}
+        initialValues={{ name: "", shortName: "", description: "", price: "", status: "start", categoryID: "", cover: "", discount: "" }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
 
           const formData = new FormData();
@@ -83,7 +83,7 @@ export default function Products() {
             formData.append(key, value);
           });
           formData.append('cover', event.target.elements.cover.files[0]);
-          // formData.append('description', articleBody);
+          formData.append('description', articleBody);
 
           fetch(`${DataUrlV1}/courses/`, {
             method: "POST",
@@ -131,8 +131,14 @@ export default function Products() {
                   {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
                 </ErrorMessage>
               </div>
+              <Input label="تخفیف محصول" type="text" name="discount" placeholder="10" />
               <div className='col-start-1 md:col-end-3 w-[99%]'>
-                <Input label="توضیحات محصول" type="text" name="description" placeholder="گوشت گوساله" />
+                <label className="input-label">متن مقاله</label>
+
+                <Editor
+                  value={articleBody}
+                  setValue={setArticleBody}
+                />
               </div>
               <div className='col-start-1 md:col-end-3'>
                 <label className="input-label">ثبت</label>
@@ -177,13 +183,31 @@ export default function Products() {
                 currentItems.map((product) => (
                   <tr key={product._id} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <th scope="row" className="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      <img src={`${DataUrl}/courses/covers/${product.cover}`} alt="" className='w-[120px]' />
+                      <img loading='lazy' src={`${DataUrl}/courses/covers/${product.cover}`} alt="" className='w-[120px]' />
                     </th>
                     <th scope="row" className="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {product.name}
                     </th>
                     <td className="px-2 py-2">
-                      {product.price.toLocaleString()}
+                      {product.discount !== 0 ? (
+                        <span className='flex gap-3'>
+                          <span className='offer'>
+                            {product.price.toLocaleString()}
+                          </span>
+                          <span>
+                            {
+                              product.discount !== 0 &&
+                              (product.price - ((product.discount * product.price) / 100)).toLocaleString()
+                            }
+                          </span>
+                        </span>
+                      ) : (
+                        <span className='flex gap-3'>
+                          <span className=''>
+                            {product.price.toLocaleString()}
+                          </span>
+                        </span>
+                      )}
                     </td>
                     <td className="px-2 py-2">
                       {product.categoryID.title}
@@ -198,8 +222,6 @@ export default function Products() {
                         <button className=" dark:text-white bg-red-700 hover:bg-red-900 text-white font-DanaMedium py-2 px-4 mx-1 rounded-lg" onClick={() => {
                           removeProducts(product._id)
                         }}>حذف</button>
-                        <button className=" dark:text-white bg-red-700 hover:bg-red-900 text-white font-DanaMedium py-2 px-4 mx-1 rounded-lg" onClick={() => { console.log("edit") }}>جزئیات</button>
-
                       </div>
                     </td>
                   </tr>
@@ -228,15 +250,16 @@ export default function Products() {
               <div className="p-6 space-y-6">
                 <Formik
                   validate={productEditValidate}
-                  initialValues={{ name: `${selectProduct.name}`, shortName: `${selectProduct.shortName}`, description: selectProduct.description, price: `${selectProduct.price}`, status: "start", categoryID: `${selectProduct.categoryID._id}`, cover: '' }}
+                  initialValues={{ name: `${selectProduct.name}`, shortName: `${selectProduct.shortName}`, description: selectProduct.description, price: `${selectProduct.price}`, status: "start", categoryID: `${selectProduct.categoryID._id}`, cover: '', discount: selectProduct.discount }}
                   onSubmit={(values, { setSubmitting }) => {
                     console.log(selectProduct.description)
                     const formData = new FormData();
                     formData.append('name', values.name);
                     formData.append('shortName', values.shortName);
-                    formData.append('description', values.description);
+                    formData.append('description', selectEditProduct);
                     formData.append('price', values.price);
                     formData.append('status', "start");
+                    formData.append('discount', values.discount);
                     formData.append('categoryID', values.categoryID);
                     if (selectProductCover) {
                       formData.append('cover', selectProductCover);
@@ -286,8 +309,13 @@ export default function Products() {
                             {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
                           </ErrorMessage>
                         </div>
+                        <Input label="تخفیف محصول" type="text" name="discount" placeholder="10" />
                         <div className='col-start-1 md:col-end-3 w-[99%]'>
-                          <Input label="توضیحات محصول" type="text" name="description" placeholder="گوشت گوساله" />
+                          <label className="input-label">متن مقاله</label>
+                          <Editor
+                            value={(typeof (selectProduct.description) == "string") ? (selectProduct.description) : (selectProduct.description[0])}
+                            setValue={setSelectEditArticles}
+                          />
                         </div>
                         <div className='col-start-1 md:col-end-3'>
                           <label className="input-label">ثبت </label>

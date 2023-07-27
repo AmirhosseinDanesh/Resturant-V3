@@ -11,6 +11,7 @@ const en = {
     categories: "Categories",
     comments: "Comments",
     contact: "Contact",
+    campaign: "Campaign",
 
     offs: "offs",
 

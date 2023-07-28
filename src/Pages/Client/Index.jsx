@@ -100,7 +100,7 @@ export default function Index() {
             }
           </div>
           {/* section body */}
-          <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-5'>
+          <div className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-5'>
             {
               allProducts.length ? (
                 filterProducts.map((pro) => (

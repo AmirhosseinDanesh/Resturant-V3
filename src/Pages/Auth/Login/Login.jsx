@@ -102,9 +102,7 @@ export default function Login() {
                                         >
                                             {isSubmitting ? ("لطفا صبر کنید ...") : ("ورود")}
                                         </button>
-                                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                            <NavLink to="/register" className=" text-gray-500 dark:text-gray-400 p-2 rounded-lg font-DanaMedium">ثبت نام</NavLink>
-                                        </p>
+
                                     </Form>
                                 )}
                             </Formik>

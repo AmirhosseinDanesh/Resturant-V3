@@ -185,23 +185,27 @@ export default function Header() {
                                 </svg>
                               </button>
                             </div>
+                            <div className='flex justify-between items-center gap-x-3 w-1/2  border p-2 text-orange-300 border-orange-300 rounded-full'>
+                              <button onClick={() => {
+                                addToCart(product)
+                              }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                                  <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" />
+                                </svg>
+                              </button>
+                              <span>{product.count}</span>
+                              <button onClick={() => {
+                                removeProducts(product)
+                              }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                                  <path d="M6.75 9.25a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" />
+                                </svg>
+                              </button>
+                            </div>
                             <div className='flex justify-between items-center'>
-                              <div className='flex justify-between items-center gap-x-3  border p-2 text-orange-300 border-orange-300 rounded-full'>
-                                <button onClick={() => {
-                                  addToCart(product)
-                                }}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                                    <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" />
-                                  </svg>
-                                </button>
-                                <span>{product.count}</span>
-                                <button onClick={() => {
-                                  removeProducts(product)
-                                }}>
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                                    <path d="M6.75 9.25a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" />
-                                  </svg>
-                                </button>
+                              <div class="offer text-gray-400/80 flex justify-center items-center">
+                                <span class="text-xs md:text-sm">{(product.price * product.count).toLocaleString()}</span>
+                                <span class="hidden xl:inline text-sm tracking-tighter mr-0.5">تومان</span>
                               </div>
                               <div className='text-zinc-700 dark:text-white font-DanaBold'>
                                 {
@@ -222,17 +226,17 @@ export default function Header() {
                       contextData.userCart.length ? (
                         <>
                           <div>
-                            <span className='font-DanaMedium text-gray-300 text-xs tracking-tighter'>مبلغ قابل پرداخت</span>
-                            <div className='text-zinc-700 dark:text-white font-DanaBold '>
-                              <span>
-                                {calculateTotalPrice().toLocaleString()}
-                              </span>
-                              <span className='font-Dana text-sm mr-1'>
-                                تومان
-                              </span>
-                            </div>
+                            <span className='font-DanaMedium text-gray-700 text-base tracking-tighter'>جمع كل سبد خريد:</span>
                           </div>
-                          <NavLink to="/cart" className='flex text-lg items-center justify-center w-[144px] h-14 text-white bg-teal-600 dark:bg-emerald-500 dark:hover:bg-emerald-700 transition-colors hover:bg-teal-700 rounded-xl tracking-tightest'>ثبت سفارش</NavLink>
+                          <div className='text-zinc-700 dark:text-white font-DanaBold '>
+                            <span>
+                              {calculateTotalPrice().toLocaleString()}
+                            </span>
+                            <span className='font-Dana text-sm mr-1'>
+                              تومان
+                            </span>
+                          </div>
+                          {/* <NavLink to="/cart" className='flex text-lg items-center justify-center w-[144px] h-14 text-white bg-teal-600 dark:bg-emerald-500 dark:hover:bg-emerald-700 transition-colors hover:bg-teal-700 rounded-xl tracking-tightest'>ثبت سفارش</NavLink> */}
                         </>
                       ) : (
                         <>
@@ -337,7 +341,7 @@ export default function Header() {
                 صفحه اصلی
               </NavLink>
             </li>
-            
+
             {/* <li>
               <NavLink to="/articles" className={({ isActive }) => (isActive) ? ("flex items-center bg-orange-200/20 text-orange-300 mb-4 h-10 rounded-md gap-x-2 pr-2") : ("flex items-center mb-4 h-10  rounded-md gap-x-2 pr-2")} >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -491,19 +495,19 @@ export default function Header() {
           {
             contextData.userCart.length ? (
               <>
-                <div className='flex flex-col gap-y-3 mt-5'>
-                  <span className='font-DanaMedium text-gray-300 text-xs '>مبلغ قابل پرداخت</span>
-                  <div className='text-zinc-700 dark:text-white font-DanaBold text-xs '>
-                    {calculateTotalPrice().toLocaleString()}
-                    <span className='font-Dana text-sm mr-1'>
-                      تومان
-                    </span>
-                  </div>
+                <div className='flex flex-col gap-y-3'>
+                  <span className='font-DanaMedium text-gray-700 text-sm dark:text-white'>جمع كل سبد خريد:</span>
+                </div>
+                <div className='text-zinc-700 dark:text-white font-DanaBold text-xs '>
+                  {calculateTotalPrice().toLocaleString()}
+                  <span className='font-Dana text-sm mr-1'>
+                    تومان
+                  </span>
                 </div>
 
-                <div className='mt-5'>
+                {/* <div className='mt-5'>
                   <NavLink to="/cart" className='text-sm text-center flex items-center justify-center w-[90px] h-12  text-white bg-teal-600 dark:bg-emerald-500 dark:hover:bg-emerald-700 transition-colors hover:bg-teal-700 rounded-xl tracking-tightest'>ثبت سفارش</NavLink>
-                </div>
+                </div> */}
               </>
             ) : (
               <>

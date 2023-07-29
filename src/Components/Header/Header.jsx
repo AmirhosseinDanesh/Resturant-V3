@@ -112,6 +112,7 @@ export default function Header() {
   }, []);
   return (
     <>
+      {/* desktop header */}
       <header className='fixed top-9 right-0 left-0 hidden md:flex items-center px-5 lg:px-10 rounded-3xl w-[98%] lg:w-[90%] h-24 mx-auto bg-black/50 backdrop-blur-[6px] z-50'>
         <div className='flex items-center w-full justify-between'>
           {/* logo & Menu */}
@@ -128,7 +129,9 @@ export default function Header() {
                 <NavLink className={({ isActive }) => (isActive) ? ("text-orange-200") : ("")} to="/">صفحه اصلی</NavLink>
               </li>
               <li className='font-DanaMedium'>
-                <NavLink to="/about-us" className={({ isActive }) => (isActive) ? ("text-orange-200") : ("")}>درباره ما</NavLink>
+                <NavLink to="/"
+                // className={({ isActive }) => (isActive) ? ("text-orange-200") : ("")}
+                >درباره ما</NavLink>
               </li>
             </ul>
           </nav>
@@ -279,7 +282,8 @@ export default function Header() {
         </div>
       </header>
 
-      <div className='flex md:hidden items-center justify-between bg-white dark:bg-zinc-700 h-16 px-4'>
+      {/* mobile header */}
+      <div className='fixed z-10 top-0 right-0 left-0 flex md:hidden items-center justify-between bg-white dark:bg-zinc-700 h-16 px-4'>
         <div className='p-1 rounded-lg hover:bg-zinc-800/50 ' onClick={() => {
           setHeaderRightNavbar(true)
         }}>
@@ -315,7 +319,6 @@ export default function Header() {
 
 
       </div>
-
 
       {/* Right Navbar */}
       <div className={headerRightNavbar ? ("block md:hidden  fixed overflow-y-auto top-0 bottom-0 right-0 w-64 min-h-screen bg-white dark:bg-zinc-700 pt-3 px-4 z-20 transition-all") : ("fixed top-0 -right-64 w-64 min-h-screen bg-white dark:bg-zinc-700 pt-3 px-4 z-20 transition-all")}>
@@ -353,7 +356,9 @@ export default function Header() {
               </NavLink>
             </li> */}
             <li>
-              <NavLink to="/about-us" className={({ isActive }) => (isActive) ? ("flex items-center bg-orange-200/20 text-orange-300 mb-4 h-10 rounded-md gap-x-2 pr-2") : ("flex items-center mb-4 h-10  rounded-md gap-x-2 pr-2")} >
+              <NavLink to="/"
+                className="flex items-center mb-4 h-10 rounded-md gap-x-2 pr-2"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                 </svg>
@@ -414,10 +419,7 @@ export default function Header() {
         </div>
       </div>
 
-
-
-
-      {/* Left  Cart */}
+      {/* Left  Navbar */}
       <div className={headerLeftNavbar ? (" md:hidden fixed flex flex-col overflow-y-auto top-0 bottom-0 left-0 w-64 min-h-full bg-white dark:bg-zinc-700 pt-3 px-4 z-20 transition-all") : ("fixed top-0 -left-64 w-64 min-h-screen bg-white dark:bg-zinc-700 pt-3 px-4 z-20 transition-all")}>
         {/* LOGO */}
         <div className='flex items-center justify-between pb-5 mb-6 border-b border-b-gray-100 dark:border-b-white/10'>
@@ -528,8 +530,7 @@ export default function Header() {
 
       </div>
 
-
-
+      {/* overlay */}
       <div className={headerLeftNavbar || headerRightNavbar ? ("overlay md:hidden fixed inset-0 w-full h-full bg-black/40 z-10 transition-all") : ("transition-all")}
         onClick={() => {
           setHeaderLeftNavbar(false)

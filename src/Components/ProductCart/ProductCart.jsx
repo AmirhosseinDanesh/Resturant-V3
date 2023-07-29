@@ -120,7 +120,7 @@ export default function ProductCart({ ...pro }) {
                 <ToastContainer
                     position="top-center"
                     transition={Slide}
-                    autoClose={2000}
+                    autoClose={1500}
                     hideProgressBar={false}
                     newestOnTop={false}
                     closeOnClick

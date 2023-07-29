@@ -17,7 +17,7 @@ export default function Slider({ children }) {
           disableOnInteraction: false,
         }}
         modules={[Autoplay, EffectFade]}
-        className="mySwiper"
+        className="mySwiper pt-14 sm:pt-0"
       >
         {children}
       </Swiper>

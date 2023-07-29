@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import AuthContext from '../../Context/authContext'
 
 import ProductsContext from '../../Context/ProductsContext'
+import { toast } from 'react-toastify'
+import Toast from '../Toast/Toast'
 
 
 export default function Header() {
@@ -24,6 +26,7 @@ export default function Header() {
   }
 
   const addToCart = (pro) => {
+
     let newUserProductCart = {
       id: pro._id,
       name: pro.name,
@@ -31,7 +34,6 @@ export default function Header() {
       count: 1,
       cover: pro.cover,
       discount: pro.discount
-
     }
 
     let isProductInCart = contextData.userCart.some(product => (
@@ -203,9 +205,9 @@ export default function Header() {
                               </button>
                             </div>
                             <div className='flex justify-between items-center'>
-                              <div class="offer text-gray-400/80 flex justify-center items-center">
-                                <span class="text-xs md:text-sm">{(product.price * product.count).toLocaleString()}</span>
-                                <span class="hidden xl:inline text-sm tracking-tighter mr-0.5">تومان</span>
+                              <div className="offer text-gray-400/80 flex justify-center items-center">
+                                <span className="text-xs md:text-sm">{(product.price * product.count).toLocaleString()}</span>
+                                <span className="hidden xl:inline text-sm tracking-tighter mr-0.5">تومان</span>
                               </div>
                               <div className='text-zinc-700 dark:text-white font-DanaBold'>
                                 {
@@ -496,9 +498,9 @@ export default function Header() {
             contextData.userCart.length ? (
               <>
                 <div className='flex flex-col gap-y-3'>
-                  <span className='font-DanaMedium text-gray-700 text-sm dark:text-white'>جمع كل سبد خريد:</span>
+                  <span className='font-DanaMedium text-gray-700 text-sm dark:text-white mt-4'>جمع كل سبد خريد:</span>
                 </div>
-                <div className='text-zinc-700 dark:text-white font-DanaBold text-xs '>
+                <div className='text-zinc-700 dark:text-white font-DanaBold text-xs  mt-4'>
                   {calculateTotalPrice().toLocaleString()}
                   <span className='font-Dana text-sm mr-1'>
                     تومان

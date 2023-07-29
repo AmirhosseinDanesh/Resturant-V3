@@ -89,7 +89,7 @@ export default function Index() {
             </button>
             {
               allCategory.map((cat) => (
-                <button className='w-28 sm:w-32 md:w-36 lg:w-40 text-gray-800 bg-gradient-to-r from-orange-300 to-orange-400 hover:bg-gradient-to-l font-MorabbaBold rounded-2xl text-sm text-center py-3 px-2 my-2'
+                <button key={cat._id} className='w-28 sm:w-32 md:w-36 lg:w-40 text-gray-800 bg-gradient-to-r from-orange-300 to-orange-400 hover:bg-gradient-to-l font-MorabbaBold rounded-2xl text-sm text-center py-3 px-2 my-2'
                   onClick={() => {
                     filterCategory(cat._id)
                   }}

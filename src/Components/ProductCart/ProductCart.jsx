@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { DataUrl } from '../../Data/Data'
-
+import { Slide, ToastContainer } from 'react-toastify'
 import ProductsContext from "../../Context/ProductsContext"
+import { toast } from 'react-toastify'
 
 export default function ProductCart({ ...pro }) {
     const contextData = useContext(ProductsContext)
@@ -12,6 +13,8 @@ export default function ProductCart({ ...pro }) {
     }
 
     const addToCart = (pro) => {
+        toast.success("محصول با موفقیت به سبد خرید اضافه شد.")
+        console.log("first")
         let newUserProductCart = {
             id: pro._id,
             name: pro.name,
@@ -59,7 +62,7 @@ export default function ProductCart({ ...pro }) {
                     }
                     {
                         (pro.discount) ? (
-                            <span className='absolute top-1.5 right-3 md:right-8 block h-[30px] !leading-[34px] font-DanaMedium text-xs md:text-base text-white dark:text-zinc-700 bg-orange-300 px-1.5 rounded-full'>
+                            <span className='absolute -top-2.5 -right-3 md:right-8 block h-[30px] !leading-[34px] font-DanaMedium text-xs md:text-base text-white dark:text-zinc-700 bg-orange-300 px-1.5 rounded-full'>
                                 {pro.discount}%
                             </span>
                         ) : (
@@ -68,7 +71,7 @@ export default function ProductCart({ ...pro }) {
                     }
                 </NavLink>
                 <div className='w-1/2 sm:w-full'>
-                    <h5 className='font-DanaMedium text-sm xs:text-xl text-zinc-700 dark:text-white line-clamp-2 h-10 md:h-14'>
+                    <h5 className='font-DanaMedium text-sm xs:text-xl text-zinc-700 dark:text-white line-clamp-2 h-10 md:h-14 sm:mt-4'>
                         {pro.name}
                     </h5>
                     <div className='flex justify-between items-center'>
@@ -93,7 +96,6 @@ export default function ProductCart({ ...pro }) {
                                 <span className='flex-center md:w-9 h-[26px] md:h-9 bg-gray-100 hover:bg-teal-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 text-gray-400  hover:text-white rounded-full transition-all cursor-pointer ' onClick={() => {
                                     addToCart(pro)
                                 }}>
-                                    <span className='md:hidden text-xs'>اضافه کردن یادداشت</span>
                                     <svg className=" w-4 md:w-[22px] h-4 md:h-[22px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                                     </svg>
@@ -101,20 +103,35 @@ export default function ProductCart({ ...pro }) {
                             </div>
                         </div>
                     </div>
+
                     <div className='flex md:hidden items-center justify-between mt-1.5'>
                         <div className='w-full'>
-                            <span className='flex justify-between mt-4 items-center md:w-9 h-[26px] md:h-9 bg-gray-100 hover:bg-teal-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 text-gray-400  hover:text-white rounded-full transition-all cursor-pointer p-1 ' onClick={() => {
+                            <span className='flex justify-center mt-4 items-center md:w-9 h-7 md:h-9 bg-gray-100 hover:bg-teal-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 text-gray-400  hover:text-white rounded-full transition-all cursor-pointer p-1 ' onClick={() => {
                                 addToCart(pro)
                             }}>
-                                <span className='md:hidden text-xs'>اضافه کردن</span>
-                                <svg className=" w-4 md:w-[22px] h-4 md:h-[22px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
+                                <span className='md:hidden text-xs xs:text-sm'>اضافه کردن به سبد خرید</span>
+                                {/* <svg className=" w-4 md:w-[22px] h-4 md:h-[22px]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                </svg>
+                                </svg> */}
                             </span>
                         </div>
                     </div>
                 </div>
+                <ToastContainer
+                    position="top-center"
+                    transition={Slide}
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme={localStorage.getItem("theme")}
+                />
             </div>
+
         </>
     )
 }

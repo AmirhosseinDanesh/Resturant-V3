@@ -112,11 +112,11 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
-  .active-swiper-custom{
-    @apply flex-center w-9 h-9 md:w-10 md:h-10 bg-white dark:bg-zinc-700 text-zinc-700 dark:text-white rounded-full shadow-normal transition-all hover:bg-gray-300 dark:hover:bg-white dark:hover:text-zinc-700 cursor-pointer
+  .active-swiper-custom {
+    @apply flex-center w-9 h-9 md:w-10 md:h-10 bg-white dark:bg-zinc-700 text-zinc-700 dark:text-white rounded-full shadow-normal transition-all hover:bg-gray-300 dark:hover:bg-white dark:hover:text-zinc-700 cursor-pointer;
   }
-  .disable-swiper-custom{
-    @apply flex-center w-9 h-9 md:w-10 md:h-10 bg-gray-100 dark:bg-zinc-600 text-zinc-700 dark:text-gray-400 rounded-full transition-all
+  .disable-swiper-custom {
+    @apply flex-center w-9 h-9 md:w-10 md:h-10 bg-gray-100 dark:bg-zinc-600 text-zinc-700 dark:text-gray-400 rounded-full transition-all;
   }
 }
 
@@ -137,13 +137,24 @@
   display: flex;
   justify-content: center;
 }
-
-.Toastify__toast-body {
-  font-family: "Dana";
-  font-size: 0.8rem;
+.Toastify__toast {
   direction: rtl;
 }
-
+.Toastify__toast-body {
+  font-family: "Dana";
+  font-size: 0.7rem;
+  direction: rtl;
+}
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    width: 80%;
+    padding: 0;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
 .swiper.mySwiper {
   overflow: inherit !important;
 }
@@ -164,11 +175,11 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-    background-color: white;
-    background-color: rgba(255, 255, 255, 0.5);
-    right:10px;
-    padding: 30px;
-    color: #000 !important;
-    fill: black !important;
-    stroke: black !important;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
+  right: 10px;
+  padding: 30px;
+  color: #000 !important;
+  fill: black !important;
+  stroke: black !important;
 }

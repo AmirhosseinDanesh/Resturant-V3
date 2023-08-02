@@ -125,7 +125,7 @@ export default function Products() {
                 </ErrorMessage>
               </div>
               <div>
-                <label className="input-label">عکس محصول</label>
+                <label className="input-label"> عکس محصول 260*260</label>
                 <Field type="file" name="cover" className="input"></Field>
                 <ErrorMessage name="cover">
                   {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
@@ -133,7 +133,7 @@ export default function Products() {
               </div>
               <Input label="تخفیف محصول" type="text" name="discount" placeholder="10" />
               <div className='col-start-1 md:col-end-3'>
-                <label className="input-label">متن مقاله</label>
+                <label className="input-label">توضیحات محصول</label>
                 <Field as="textarea" name="description" className="input"></Field>
                 <ErrorMessage name="description">
                   {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
@@ -183,10 +183,10 @@ export default function Products() {
               childrenTD={
                 currentItems.map((product) => (
                   <tr key={product._id} className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th scope="row" className="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th className="px-3 py-3">
                       <img loading='lazy' src={`${DataUrl}/courses/covers/${product.cover}`} alt="" className='w-[120px]' />
                     </th>
-                    <th scope="row" className="px-3 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th className="px-6 py-4 font-medium text-gray-900  dark:text-white">
                       {product.name}
                     </th>
                     <td className="px-2 py-2">

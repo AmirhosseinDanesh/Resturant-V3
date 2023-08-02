@@ -71,21 +71,21 @@ export default function ProductDetail() {
       <Header />
       <div className='md:mt-40 container py-10 flex flex-col-reverse md:flex-row justify-around items-center md:gap-x-10'>
         <div className='w-full md:w-1/2 text-gray-950 dark:text-white flex flex-col gap-y-5 mt-16 md:mt-0'>
-          <NavLink className="text-base md:text-xl text-gray-500 dark:text-gray-400 hover:text-gray-900 hover:dark:text-white" to="/">
+          <NavLink className="text-base  md:text-xl text-gray-500 dark:text-gray-400 hover:text-gray-900 hover:dark:text-white" to="/">
             صفحه اصلی
           </NavLink>
-          <div className='flex justify-between items-center '>
-            <h2 className='text-3xl font-MorabbaMedium'>{productDetail.name}</h2>
-            <span className='text-2xl'>{
+          <div className='flex flex-col'>
+            <h1 className='text-2xl/9 font-MorabbaMedium'>{productDetail.name}</h1>
+            <span className='flex items-center justify-center md:justify-end gap-x-5 my-10'>{
               (productDetail.price) ? (
                 (productDetail.discount !== 0) ? (
                   <>
                     <div className='text-gray-700 dark:text-white'>
-                      <span className='font-DanaMedium text-lg md:text-2xl'>{(productDetail.price - ((productDetail.discount * productDetail.price) / 100)).toLocaleString()}</span>
-                      <span className='text-xs tracking-tighter mr-0.5'>تومان</span>
+                      <span className='font-DanaMedium text-3xl md:text-2xl'>{(productDetail.price - ((productDetail.discount * productDetail.price) / 100)).toLocaleString()}</span>
+                      <span className='text-base tracking-tighter mr-0.5'>تومان</span>
                     </div>
-                    <div className='offer text-gray-400/80 flex justify-center items-center'>
-                      <span className='text-xs md:text-lg'>{productDetail.price.toLocaleString()}</span>
+                    <div className='offer text-gray-400/90 flex justify-center items-center'>
+                      <span className='text-base md:text-lg'>{productDetail.price.toLocaleString()}</span>
                       <span className='hidden xl:inline text-sm tracking-tighter mr-0.5'>تومان</span>
                     </div>
                   </>
@@ -103,7 +103,7 @@ export default function ProductDetail() {
             }
             </span>
           </div>
-          <p className='text-sm md:text-base leading-7 md:leading-9 font-DanaMedium tracking-wide' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(productDetail.description) }}>
+          <p className='text-sm md:text-base leading-7 md:leading-9 font-DanaMedium tracking-wide text-gray-700 dark:text-gray-100' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(productDetail.description) }}>
 
           </p>
           <div>

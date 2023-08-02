@@ -293,7 +293,7 @@ export default function Header() {
         </div>
 
         <NavLink to="/">
-          <img src="images/app-logo.png" className='w-16' alt="" />
+          <img src="/images/app-logo.png" className='w-16' alt="" />
         </NavLink>
 
         <div className='p-1 rounded-lg hover:bg-zinc-800/50 ' onClick={() => {

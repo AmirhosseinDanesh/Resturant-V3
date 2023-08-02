@@ -51,13 +51,13 @@ export default function ProductCart({ ...pro }) {
 
     return (
         <>
-            <div className='flex sm:block gap-x-5 items-center p-2 md:p-5 bg-white dark:bg-zinc-700 shadow-normal rounded-2xl'>
+            <div className='flex sm:block gap-x-4 items-center  p-2 md:p-5 bg-white dark:bg-zinc-700 shadow-normal rounded-2xl'>
                 <NavLink className="relative w-1/2  md:mb-5" to={`/products/${pro.shortName}`}>
                     {
                         (pro.cover) ? (
-                            <img loading='lazy' className=" object-contain" src={`${DataUrl}/courses/covers/${pro.cover}`} alt="" />
+                            <img loading='lazy' className="rounded-2xl md:h-64 object-contain" src={`${DataUrl}/courses/covers/${pro.cover}`} alt="" />
                         ) : (
-                            <img loading='lazy' className=" object-contain" src="/images/blogs/nocover.png" alt="" />
+                            <img loading='lazy' className="rounded-2xl md:h-64 object-contain" src="/images/blogs/nocover.png" alt="" />
                         )
                     }
                     {
@@ -106,7 +106,7 @@ export default function ProductCart({ ...pro }) {
 
                     <div className='flex md:hidden items-center justify-between mt-1.5'>
                         <div className='w-full'>
-                            <span className='flex justify-center mt-4 items-center md:w-9 h-7 md:h-9 bg-gray-100 hover:bg-teal-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 text-gray-400  hover:text-white rounded-full transition-all cursor-pointer p-1 ' onClick={() => {
+                            <span className='flex justify-center mt-4 items-center md:w-9 h-8 md:h-9 bg-green-700 text-white  hover:bg-green-800 dark:bg-emerald-500 dark:hover:bg-emerald-700 rounded-full transition-all cursor-pointer ' onClick={() => {
                                 addToCart(pro)
                             }}>
                                 <span className='md:hidden text-xs xs:text-sm'>اضافه کردن به سبد خرید</span>

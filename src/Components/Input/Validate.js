@@ -103,9 +103,9 @@ export const productEditValidate = (values) => {
     if (values.shortName === "") {
         errors.shortName = "وارد کردن ایمیل الزامی است"
     }
-    if (values.description === "") {
-        errors.description = "وارد کردن ایمیل الزامی است"
-    }
+    // if (values.description === "") {
+    //     errors.description = "وارد کردن ایمیل الزامی است"
+    // }
     if (values.price === "") {
         errors.price = "وارد کردن ایمیل الزامی است"
     } else if (!/^\d+$/i.test(values.price)) {

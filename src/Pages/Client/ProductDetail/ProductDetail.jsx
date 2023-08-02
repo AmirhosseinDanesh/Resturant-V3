@@ -69,23 +69,11 @@ export default function ProductDetail() {
   return (
     <>
       <Header />
-      <div className='md:mt-40 container py-10 flex flex-col-reverse md:flex-row justify-around items-center'>
+      <div className='md:mt-40 container py-10 flex flex-col-reverse md:flex-row justify-around items-center md:gap-x-10'>
         <div className='w-full md:w-1/2 text-gray-950 dark:text-white flex flex-col gap-y-5 mt-16 md:mt-0'>
-          <h3 className="flex gap-x-2 text-gray-600 dark:text-gray-400 font-DanaBold" >
-            {
-              (productDetail.categoryID) ? (
-                <>
-                  <NavLink className=" hover:text-gray-900 hover:dark:text-white text-sm md:text-base" to="/">خانه</NavLink>
-                  {/* <span className=''>/</span> */}
-                  {/* <NavLink className="underline hover:text-gray-900 hover:dark:text-white text-sm md:text-base" to={`/category/${productDetail.categoryID.name}`}>{productDetail.categoryID.title}</NavLink> */}
-                </>
-              ) : (
-                <>
-                </>
-              )
-            }
-
-          </h3>
+          <NavLink className="text-base md:text-xl text-gray-500 dark:text-gray-400 hover:text-gray-900 hover:dark:text-white" to="/">
+            صفحه اصلی
+          </NavLink>
           <div className='flex justify-between items-center '>
             <h2 className='text-3xl font-MorabbaMedium'>{productDetail.name}</h2>
             <span className='text-2xl'>{

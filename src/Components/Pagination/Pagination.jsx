@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 
 export default function Pagination({ data, items, setItems }) {
     const [itemOffset, setItemOffset] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(4);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const currentItems = data.slice(itemOffset, itemOffset + itemsPerPage);
 
@@ -38,6 +38,7 @@ export default function Pagination({ data, items, setItems }) {
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                        <option value="10">10</option>
                     </select>
                     <div className='flex justify-between gap-x-1'>
                         <p>شماره</p>

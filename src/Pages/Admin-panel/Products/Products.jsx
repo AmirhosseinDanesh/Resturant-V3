@@ -10,9 +10,9 @@ import Table from '../../../Components/Table/Table.jsx'
 import Modal from '../../../Components/Modal/Modal.jsx'
 import Toast from "../../../Components/Toast/Toast.jsx"
 import swal from 'sweetalert'
-import Editor from '../../../Components/Editor/Editor'
 import Search from '../../../Components/Search/Search';
 export default function Products() {
+  
   const LocalStorageData = JSON.parse(localStorage.getItem("user"))
   const [products, setProducts] = useState([])
   const [selectProductCover, setSelectProductcover] = useState("")
@@ -25,6 +25,7 @@ export default function Products() {
   const [currentItems, setCurrentItems] = useState([])
   const [searchValue, setSearchValue] = useState("")
   const [filteredProducts, setFilteredProducts] = useState([]);
+  
   const getProducts = () => {
     fetch(`${DataUrlV1}/courses`)
       .then(res => res.json())
@@ -83,7 +84,6 @@ export default function Products() {
             formData.append(key, value);
           });
           formData.append('cover', event.target.elements.cover.files[0]);
-          formData.append('description', articleBody);
 
           fetch(`${DataUrlV1}/courses/`, {
             method: "POST",
@@ -132,13 +132,12 @@ export default function Products() {
                 </ErrorMessage>
               </div>
               <Input label="تخفیف محصول" type="text" name="discount" placeholder="10" />
-              <div className='col-start-1 md:col-end-3 w-[99%]'>
+              <div className='col-start-1 md:col-end-3'>
                 <label className="input-label">متن مقاله</label>
-
-                <Editor
-                  value={articleBody}
-                  setValue={setArticleBody}
-                />
+                <Field as="textarea" name="description" className="input"></Field>
+                <ErrorMessage name="description">
+                  {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
+                </ErrorMessage>
               </div>
               <div className='col-start-1 md:col-end-3'>
                 <label className="input-label">ثبت</label>
@@ -154,8 +153,10 @@ export default function Products() {
         )}
 
       </Formik >
+
       {/* Product List */}
       <Search data={products} value="name" setFilteredProducts={setFilteredProducts} placeholder={"نام محصول مورد نظر را بنویسید ..."} />
+
       {
         (products.length) ? (
           <>
@@ -214,12 +215,12 @@ export default function Products() {
                     </td>
                     <td className="px-2 py-2">
                       <div className='flex'>
-                        <button className=" dark:text-white bg-blue-700 hover:bg-blue-900 text-white font-DanaMedium py-2 px-4 mx-1 rounded-lg" onClick={() => {
+                        <button className="text-white bg-blue-700  hover:bg-blue-900  text-xs md:text-sm font-DanaMedium py-2 px-3 mx-1 rounded-lg" onClick={() => {
                           setSelectProduct(product)
                           setSelectProductcover(product.cover)
                           setIsShowModal(true)
                         }}>ویرایش</button>
-                        <button className=" dark:text-white bg-red-700 hover:bg-red-900 text-white font-DanaMedium py-2 px-4 mx-1 rounded-lg" onClick={() => {
+                        <button className=" dark:text-white bg-red-700 hover:bg-red-900 text-white text-xs md:text-sm font-DanaMedium py-2 px-3 mx-1 rounded-lg" onClick={() => {
                           removeProducts(product._id)
                         }}>حذف</button>
                       </div>
@@ -252,11 +253,10 @@ export default function Products() {
                   validate={productEditValidate}
                   initialValues={{ name: `${selectProduct.name}`, shortName: `${selectProduct.shortName}`, description: selectProduct.description, price: `${selectProduct.price}`, status: "start", categoryID: `${selectProduct.categoryID._id}`, cover: '', discount: selectProduct.discount }}
                   onSubmit={(values, { setSubmitting }) => {
-                    console.log(selectProduct.description)
                     const formData = new FormData();
                     formData.append('name', values.name);
                     formData.append('shortName', values.shortName);
-                    formData.append('description', selectEditProduct);
+                    formData.append('description', values.description);
                     formData.append('price', values.price);
                     formData.append('status', "start");
                     formData.append('discount', values.discount);
@@ -312,10 +312,10 @@ export default function Products() {
                         <Input label="تخفیف محصول" type="text" name="discount" placeholder="10" />
                         <div className='col-start-1 md:col-end-3 w-[99%]'>
                           <label className="input-label">متن مقاله</label>
-                          <Editor
-                            value={(typeof (selectProduct.description) == "string") ? (selectProduct.description) : (selectProduct.description[0])}
-                            setValue={setSelectEditArticles}
-                          />
+                          <Field as="textarea" name="description" className="input"></Field>
+                          <ErrorMessage name="description">
+                            {(msg) => <span className='text-xs text-red-600'>{msg}</span>}
+                          </ErrorMessage>
                         </div>
                         <div className='col-start-1 md:col-end-3'>
                           <label className="input-label">ثبت </label>
